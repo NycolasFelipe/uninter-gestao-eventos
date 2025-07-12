@@ -1,0 +1,57 @@
+.schoolDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.schoolHeader {
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.schoolName {
+  font-size: 1.8rem;
+  color: var(--clr-text-main);
+}
+
+.detailSection {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--clr-primary-green);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.detailItem {
+  display: flex;
+  margin-bottom: var(--spacing-md);
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  width: 120px;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  gap: var(--spacing-sm);
+}
+
+.detailIcon {
+  color: #666;
+}
+
+.detailValue {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+}

@@ -1,0 +1,98 @@
+.schoolForm {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.formHeader {
+  text-align: center;
+}
+
+.formHeader h2 {
+  color: var(--clr-primary);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.8rem;
+}
+
+.formHeader p {
+  color: var(--clr-text-subtle);
+  font-size: 0.95rem;
+}
+
+.alert {
+  margin-bottom: var(--spacing-md);
+}
+
+.formGroup {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--clr-text-main);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.95rem;
+}
+
+.inputIcon {
+  color: var(--clr-primary);
+  font-size: 1.1rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 8px;
+  font-size: var(--font-size-md);
+  transition: all 0.2s ease;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--clr-primary-green);
+  box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.2);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  border-top: 1px solid var(--clr-border-subtle);
+  padding-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .schoolForm {
+    padding: var(--spacing-md);
+    margin: var(--spacing-sm);
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 480px) {
+  .formHeader h2 {
+    font-size: 1.5rem;
+  }
+
+  .formHeader p {
+    font-size: 0.85rem;
+  }
+}

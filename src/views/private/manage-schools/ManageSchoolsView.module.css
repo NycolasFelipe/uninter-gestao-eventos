@@ -1,0 +1,189 @@
+.manageSchoolsContainer {
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: var(--spacing-lg) auto;
+}
+
+.pageHeader {
+  margin-bottom: var(--spacing-xl);
+  text-align: left;
+  padding-bottom: var(--spacing-md);
+  position: relative;
+  max-width: 800px;
+}
+
+.pageHeader h1 {
+  font-family: var(--font-heading);
+  color: var(--clr-primary-green);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.pageHeader p {
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-main);
+  opacity: 0.9;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.headerAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--clr-primary-green);
+  border-radius: 2px;
+}
+
+.controlsSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+.searchContainer {
+  display: flex;
+  flex: 1;
+  max-width: 600px;
+  gap: var(--spacing-md);
+}
+
+.searchContainer .searchInputWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.searchInputWrapper .searchInput {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) 40px !important;
+  font-size: var(--font-size-md);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 6px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.searchInputWrapper .searchInput:focus {
+  outline: none;
+  border-color: var(--clr-primary-green);
+}
+
+.searchInputWrapper .searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 21px;
+  transform: translateY(-50%);
+  color: #777;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 8px;
+}
+
+.schoolsTable {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--clr-neutral-white);
+}
+
+.schoolsTable th {
+  background-color: #f8f9fa;
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--clr-border-subtle);
+}
+
+.schoolsTable th:last-of-type {
+  width: 160px;
+}
+
+.schoolsTable td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--clr-border-subtle);
+  word-wrap: break-word;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: #777;
+  font-style: italic;
+}
+
+.alert {
+  margin-bottom: var(--spacing-lg);
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(52, 168, 83, 0.2);
+  border-top: 3px solid var(--clr-primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .manageSchoolsContainer {
+    padding: var(--spacing-md);
+  }
+
+  .pageHeader h1 {
+    font-size: 2.2rem;
+  }
+
+  .controlsSection {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchContainer {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageHeader h1 {
+    font-size: 1.8rem;
+  }
+
+  .schoolsTable th,
+  .schoolsTable td {
+    padding: var(--spacing-sm);
+  }
+}
