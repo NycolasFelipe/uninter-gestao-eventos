@@ -22,6 +22,9 @@ import type { IRole } from 'src/interfaces/IRole';
 // Controllers
 import UserController from 'src/controllers/UserController';
 
+// Lib
+import maskPhone from 'src/lib/maskPhone';
+
 interface UserFormProps {
   user?: IUser | IUserDetail;
   onSuccess: () => void;
@@ -174,7 +177,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSuccess, onCancel }) => {
           type="tel"
           id="phoneNumber"
           name="phoneNumber"
-          value={formData.phoneNumber}
+          value={maskPhone(formData.phoneNumber || "")}
           onChange={handleChange}
           placeholder="(00) 00000-0000"
           className={styles.inputWithIcon}
