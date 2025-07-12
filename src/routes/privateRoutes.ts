@@ -1,3 +1,4 @@
+import ManageRolesView from "src/views/private/manage-roles/ManageRolesView";
 import HomeView from "../views/private/home/HomeView";
 import EventDetailView from "src/views/private/event-detail/EventDetailView";
 import ManageSchoolsView from "src/views/private/manage-schools/ManageSchoolsView";
@@ -10,6 +11,7 @@ const privateRoutes = [
   { path: "/manage/users", component: ManageUsersView },
   { path: "/manage/schools", component: ManageSchoolsView },
   { path: "/manage/venues", component: ManageVenuesView },
+  { path: "/manage/roles", component: ManageRolesView },
   { path: "/eventos/:eventId", component: EventDetailView, exact: true }
 ];
 

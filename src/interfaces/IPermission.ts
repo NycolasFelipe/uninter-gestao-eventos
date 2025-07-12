@@ -1,5 +1,10 @@
 export interface IPermission {
-  id: string;
+  id: number;
   permissionName: string;
-  description: string;
+  description?: string;
+}
+
+export interface IPermissionCreate {
+  permissionName: string;
+  description?: string;
 }

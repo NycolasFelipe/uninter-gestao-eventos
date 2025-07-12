@@ -12,16 +12,28 @@ class RoleController extends BaseController {
     return this.get(endpoint);
   }
 
-  async createRole(user: IRoleCreate): Promise<IRoleCreateResponse> {
-    return this.post(endpoint, user);
+  async getRolesWithUsers(): Promise<IRole[]> {
+    return this.get(`${endpoint}/users`);
   }
 
-  async updateRole(user: IRoleCreate, id: number): Promise<IResponseGeneric> {
-    return this.patch(`${endpoint}/${id}`, user);
+  async getRoleById(id: number): Promise<IRole> {
+    return this.get(`${endpoint}/${id}`);
+  }
+
+  async createRole(role: IRoleCreate): Promise<IRoleCreateResponse> {
+    return this.post(endpoint, role);
+  }
+
+  async updateRole(role: IRoleCreate, id: number): Promise<IResponseGeneric> {
+    return this.patch(`${endpoint}/${id}`, role);
   }
 
   async deleteRole(id: number): Promise<IResponseGeneric> {
     return this.delete(`${endpoint}/${id}`);
+  }
+
+  async assignPermissions(roleId: number, permissionsIds: number[]): Promise<IResponseGeneric> {
+    return this.post(`${endpoint}/${roleId}/permissions`, { permissionsIds });
   }
 }
 

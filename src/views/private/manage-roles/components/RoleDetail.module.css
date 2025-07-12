@@ -1,0 +1,132 @@
+.roleDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.section {
+  background: var(--clr-neutral-white);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+}
+
+.section h3 {
+  color: var(--clr-primary-green);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.detailItem {
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+}
+
+.detailItem strong {
+  min-width: 120px;
+  display: inline-block;
+}
+
+.permissionsList {
+  padding-left: 0;
+}
+
+.permissionsList,
+.usersList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  list-style: none;
+}
+
+.permissionItem {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: var(--spacing-sm);
+  border-left: 3px solid var(--clr-primary-green);
+}
+
+.permissionName {
+  font-weight: 600;
+  color: var(--clr-text-main);
+}
+
+.permissionDescription {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: var(--spacing-xs);
+}
+
+.usersList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  max-height: 300px;
+  overflow-y: auto;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 6px;
+}
+
+.userItem {
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.userItem:last-child {
+  border-bottom: none;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.userName {
+  font-weight: 600;
+}
+
+.userEmail {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.statusBadge.active {
+  background-color: rgba(52, 168, 83, 0.15);
+  color: var(--clr-primary-green-darker);
+}
+
+.statusBadge.inactive {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .roleDetail {
+    gap: var(--spacing-md);
+  }
+
+  .detailItem {
+    flex-direction: column;
+  }
+
+  .detailItem strong {
+    margin-bottom: var(--spacing-xs);
+  }
+}

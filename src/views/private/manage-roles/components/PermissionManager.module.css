@@ -1,0 +1,131 @@
+.permissionManager {
+  max-width: 100%;
+}
+
+.alert {
+  margin-bottom: var(--spacing-md);
+}
+
+.permissionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: var(--spacing-sm);
+}
+
+.permissionCard {
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background-color: var(--clr-neutral-white);
+}
+
+.permissionCard:hover {
+  border-color: var(--clr-primary-green);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.permissionCard.selected {
+  border-color: var(--clr-primary-green);
+  background-color: rgba(52, 168, 83, 0.05);
+  box-shadow: 0 2px 8px rgba(52, 168, 83, 0.1);
+}
+
+.permissionInfo {
+  position: relative;
+}
+
+.permissionName {
+  font-weight: 600;
+  color: var(--clr-text-main);
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  justify-content: space-between;
+}
+
+.permissionDescription {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.checkmark {
+  color: var(--clr-primary-green);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+  border-top: 1px solid var(--clr-border-subtle);
+  padding-top: var(--spacing-md);
+}
+
+.searchContainer {
+  margin-bottom: var(--spacing-md);
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 6px;
+  font-size: var(--font-size-md);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--clr-primary-green);
+  box-shadow: 0 0 0 2px rgba(52, 168, 83, 0.2);
+}
+
+.xmark {
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.permissionForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.permissionForm .formGroup {
+  margin-bottom: var(--spacing-md);
+}
+
+.permissionForm .formGroup + div {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.permissionForm label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+}
+
+.permissionForm input,
+.permissionForm textarea {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 6px;
+  font-size: var(--font-size-md);
+}
+
+.permissionForm textarea {
+  min-height: 100px;
+}
+
+@media (max-width: 768px) {
+  .permissionsGrid {
+    grid-template-columns: 1fr;
+  }
+}

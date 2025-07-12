@@ -1,10 +1,12 @@
 import type { IPermission } from "./IPermission";
+import type { IUser } from "./IUser";
 
 export interface IRole {
   id: number;
   roleName: string;
-  description: string | null;
-  permissions: IPermission[];
+  description?: string;
+  permissions?: IPermission[];
+  users?: IUser[];
 }
 
 export interface IRoleCreate {
@@ -12,4 +14,8 @@ export interface IRoleCreate {
   description?: string;
 }
 
-export interface IRoleCreateResponse extends Omit<IRole, "permissions"> { }
+export interface IRoleCreateResponse {
+  id: number;
+  roleName: string;
+  description?: string;
+}
