@@ -1,0 +1,154 @@
+.eventDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.eventHeader {
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.eventName {
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--clr-text-main);
+}
+
+.eventDescription {
+  color: var(--clr-text-subtle);
+  line-height: 1.6;
+}
+
+.detailSection {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--clr-primary-green);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.sectionIcon {
+  color: var(--clr-primary-green);
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--clr-text-main);
+}
+
+.detailIcon {
+  color: #666;
+}
+
+.detailValue {
+  padding-left: 28px;
+  /* Alinhar com o ícone */
+  color: var(--clr-text-subtle);
+}
+
+.detailText {
+  color: var(--clr-text-subtle);
+  line-height: 1.6;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.statusDraft {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: #6c757d;
+}
+
+.statusPlanned {
+  background-color: rgba(0, 123, 255, 0.15);
+  color: #007bff;
+}
+
+.statusPublished {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+}
+
+.statusOngoing {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+}
+
+.statusCompleted {
+  background-color: rgba(23, 162, 184, 0.15);
+  color: #17a2b8;
+}
+
+.statusCancelled {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.statusArchived {
+  background-color: rgba(111, 66, 193, 0.15);
+  color: #6f42c1;
+}
+
+.historyItem {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
+
+.historyDate {
+  min-width: 150px;
+  font-weight: 600;
+  color: var(--clr-text-main);
+}
+
+.historyAction {
+  flex: 1;
+  color: var(--clr-text-subtle);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .historyItem {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+}
