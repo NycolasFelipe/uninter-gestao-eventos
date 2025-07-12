@@ -47,12 +47,12 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSuccess, onCancel }) => {
   // Buscar escolas e cargos
   const { data: schools } = useQuery<ISchool[]>({
     queryKey: ["schools"],
-    queryFn: SchoolController.getSchools
+    queryFn: () => SchoolController.getSchools()
   });
 
   const { data: roles } = useQuery<IRole[]>({
     queryKey: ["roles"],
-    queryFn: RoleController.getRoles
+    queryFn: () => RoleController.getRoles()
   });
 
   useEffect(() => {
