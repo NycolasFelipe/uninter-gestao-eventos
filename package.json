@@ -10,13 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.81.2",
+    "bootstrap": "^5.3.6",
     "classnames": "2.5.1",
+    "jwt-decode": "^4.0.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-icons": "5.5.0",
     "react-router-dom": "7.6.0"
   },
   "devDependencies": {
     "@eslint/js": "9.26.0",
+    "@tanstack/eslint-plugin-query": "^5.81.2",
+    "@types/bootstrap": "^5.2.10",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.4",
     "@vitejs/plugin-react": "4.4.1",
