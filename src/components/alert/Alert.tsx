@@ -1,9 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
-import { FiAlertCircle, FiCheckCircle, FiInfo, FiAlertTriangle } from 'react-icons/fi';
-
-// Styles
 import styles from './Alert.module.css';
+
+// Lib
+import classNames from 'classnames';
+
+// Icons
+import { FiAlertCircle, FiCheckCircle, FiInfo, FiAlertTriangle } from 'react-icons/fi';
 
 interface AlertProps {
   children: React.ReactNode;
