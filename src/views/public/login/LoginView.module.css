@@ -1,0 +1,157 @@
+.splitContainer {
+  display: flex;
+  min-height: 100vh;
+}
+
+.brandingSection {
+  flex: 1;
+  background-color: var(--clr-primary-green);
+  padding: var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-text-on-primary);
+}
+
+.brandingContent {
+  max-width: 600px;
+}
+
+.platformTitle {
+  font-family: var(--font-slab);
+  color: var(--clr-neutral-white);
+  font-size: 2.75rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.platformSlogan {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+.benefitsList {
+  list-style: none;
+  margin-top: var(--spacing-xl);
+}
+
+.benefitsList li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.1rem;
+}
+
+.loginSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  background-color: var(--clr-neutral-white);
+}
+
+.loginWrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
+.welcomeTitle {
+  font-family: var(--font-heading);
+  color: var(--clr-primary-green);
+  font-size: 2.25rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.welcomeText {
+  color: var(--clr-text-main);
+  margin-bottom: var(--spacing-xl);
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.inputGroup label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 500;
+  color: var(--clr-text-main);
+  margin-bottom: var(--spacing-xs);
+}
+
+.inputIcon {
+  font-size: 1.2rem;
+}
+
+.inputField {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--clr-border-subtle);
+  border-radius: 8px;
+  margin-top: var(--spacing-xs);
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.togglePassword {
+  position: absolute;
+  right: 0;
+  padding-right: 16px;
+  top: 45%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--clr-primary-green);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.loginButton {
+  width: 100%;
+  padding: var(--spacing-md);
+  font-size: 1.1rem;
+  margin-top: var(--spacing-sm);
+}
+
+.helpLinks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+.forgotLink {
+  color: var(--clr-text-main);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .splitContainer {
+    flex-direction: column;
+  }
+
+  .brandingSection {
+    padding: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .platformTitle {
+    font-size: 2rem;
+  }
+
+  .loginSection {
+    padding: var(--spacing-lg);
+  }
+
+  .socialButtons {
+    flex-direction: column;
+  }
+}

@@ -1,8 +1,9 @@
-import React from "react";
+import LoginView from "../views/public/login/LoginView";
 
 // Rotas públicas
 const publicRoutes = [
-  { path: "/login", component: React.Fragment }
+  { path: "/", component: LoginView },
+  { path: "/login", component: LoginView }
 ];
 
 export default publicRoutes;
