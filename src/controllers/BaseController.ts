@@ -36,8 +36,16 @@ class BaseController {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage = errorData.message || `HTTP error - Status: ${response.status}`;
+
+      if (response.status === 401 && errorMessage === "Token expirado") {
+        sessionStorage.removeItem("authToken");
+        window.location.href = "/";
+        return;
+      }
+
+      throw new Error(errorMessage);
     }
 
     return response.json();
