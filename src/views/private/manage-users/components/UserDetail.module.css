@@ -1,0 +1,164 @@
+.userDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.userHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.userAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+}
+
+.userName {
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--clr-text-main);
+}
+
+.userEmail {
+  color: #666;
+}
+
+.detailSection {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--clr-primary-green);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.detailItem {
+  display: flex;
+  margin-bottom: var(--spacing-md);
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  width: 120px;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  gap: var(--spacing-sm);
+}
+
+.detailIcon {
+  color: #666;
+}
+
+.detailValue {
+  flex: 1;
+}
+
+.statusIndicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusIndicator.active {
+  background-color: rgba(52, 168, 83, 0.2);
+  color: var(--clr-primary-green);
+}
+
+.statusIndicator.inactive {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+.permissionsContainer {
+  margin-top: var(--spacing-md);
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: var(--clr-primary-green);
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  padding: var(--spacing-xs) 0;
+  margin-bottom: var(--spacing-sm);
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.toggleButton:hover {
+  color: var(--clr-primary-green-dark);
+}
+
+.permissions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-direction: column;
+}
+
+.permission {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.permissionBadge {
+  background-color: #e9f5ee;
+  color: var(--clr-primary-green);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+  font-size: var(--font-size-sm);
+  text-align: center;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.permissionDescription {
+  display: flex;
+  align-items: center;
+}
+
+.noPermissions {
+  display: flex;
+}
+
+.noPermissions p {
+  background: var(--clr-border-subtle);
+  color: var(--clr-neutral-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  border-radius: 4px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+}
