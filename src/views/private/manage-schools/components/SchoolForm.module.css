@@ -43,9 +43,7 @@
 }
 
 .inputIcon {
-  color: var(--clr-primary);
-  font-size: 1.1rem;
-}
+  color: var(--clr-primary);}
 
 .formGroup input,
 .formGroup textarea {

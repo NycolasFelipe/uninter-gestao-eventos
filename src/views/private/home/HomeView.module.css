@@ -1,0 +1,214 @@
+.homeContainer {
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: var(--spacing-lg) auto;
+}
+
+.pageHeader {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--clr-border-subtle);
+}
+
+.pageHeader h1 {
+  font-family: var(--font-heading);
+  color: var(--clr-primary-green);
+  font-size: 2.8rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.pageHeader p {
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-main);
+  opacity: 0.9;
+}
+
+.section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  color: var(--clr-text-main);
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--clr-primary-green);
+  padding-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.card {
+  background-color: var(--clr-neutral-white);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  margin-bottom: var(--spacing-sm);
+}
+
+.cardHeader h3 {
+  font-family: var(--font-heading);
+  color: var(--clr-primary-green);
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.4rem;
+}
+
+.cardDate {
+  font-size: var(--font-size-sm);
+  color: #555;
+  margin-bottom: var(--spacing-md);
+}
+
+.cardDescription {
+  font-size: var(--font-size-md);
+  color: var(--clr-text-main);
+  flex-grow: 1;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.cardButton {
+  align-self: flex-start;
+  font-weight: 600;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.announcementList {
+  list-style: none;
+  padding: 0;
+}
+
+.announcementItem {
+  background-color: var(--clr-neutral-white);
+  border: 1px solid var(--clr-border-subtle);
+  border-left: 5px solid var(--clr-primary-green);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.announcementItem h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-main);
+}
+
+.announcementItem p {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-md);
+}
+
+.announcementItem small {
+  font-size: var(--font-size-sm);
+  color: #777;
+}
+
+.quickActionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.quickActionButton {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyState {
+  color: #777;
+  font-style: italic;
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+}
+
+.seeAllLink {
+  margin-top: var(--spacing-md);
+  text-align: right;
+}
+
+.link {
+  color: var(--clr-primary-green);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
+}
+
+.link:hover,
+.link:focus {
+  color: var(--clr-primary-green-darker);
+  text-decoration: underline;
+  text-decoration-color: var(--clr-primary-green-darker);
+}
+
+@media (max-width: 768px) {
+  .homeContainer {
+    padding: var(--spacing-md);
+  }
+
+  .pageHeader h1 {
+    font-size: 2.2rem;
+  }
+
+  .pageHeader p {
+    font-size: var(--font-size-md);
+
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .quickActionsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .quickActionButton {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .pageHeader h1 {
+    font-size: 1.8rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.4rem;
+  }
+
+  .cardHeader h3 {
+    font-size: 1.2rem;
+  }
+}

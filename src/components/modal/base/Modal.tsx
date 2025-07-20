@@ -5,7 +5,7 @@ import styles from './Modal.module.css';
 import classNames from 'classnames';
 
 // Icons
-import { FiX } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
 
 interface ModalProps {
   isOpen: boolean;
@@ -57,7 +57,7 @@ const Modal: React.FC<ModalProps> = ({
             onClick={onClose}
             aria-label="Fechar modal"
           >
-            <FiX />
+            <IoClose />
           </button>
         </div>
 

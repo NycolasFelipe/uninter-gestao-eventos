@@ -4,7 +4,11 @@ import classNames from 'classnames';
 import styles from './EventForm.module.css';
 
 // Icons
-import { FiX, FiBook, FiHome } from 'react-icons/fi';
+import { IoRainy } from 'react-icons/io5';
+import { BiSolidSchool } from 'react-icons/bi';
+import { TbCalendar, TbCalendarCheck } from 'react-icons/tb';
+import { MdOutlineFormatListBulleted } from 'react-icons/md';
+import { FiX, FiBook, FiHome, FiMapPin, FiUsers } from 'react-icons/fi';
 
 // Components
 import Alert from 'src/components/alert/Alert';
@@ -14,15 +18,21 @@ import Button from 'src/components/button/Button';
 import EventController from 'src/controllers/EventController';
 import EventTypeController from 'src/controllers/EventTypeController';
 import SchoolController from 'src/controllers/SchoolController';
+import VenueController from 'src/controllers/VenueController';
+import VenuePictureController from 'src/controllers/VenuePictureController';
 
 // Interfaces
 import type { ISchool } from 'src/interfaces/ISchool';
 import type { IEventType } from 'src/interfaces/IEventType';
 import type { IEvent, IEventCreate } from 'src/interfaces/IEvent';
+import type { IVenue, IVenuePicture } from 'src/interfaces/IVenue';
 
 // Enums
 import EventStatus from 'src/enum/EventStatus';
 import EventStatusTraduzido from 'src/enum/EventStatusTraduzido';
+
+// Lib
+import getFormattedDate from 'src/lib/getFormattedDate';
 
 interface EventFormProps {
   event?: IEvent;
@@ -32,18 +42,23 @@ interface EventFormProps {
 
 const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => {
   const [formData, setFormData] = useState<IEventCreate>({
-    schoolId: 0,
-    eventTypeId: 0,
     name: '',
     description: '',
     objective: '',
     targetAudience: '',
     status: EventStatus.Draft,
-    isPublic: true
+    isPublic: true,
+    schoolId: 0,
+    eventTypeId: 0,
+    venueId: 0,
+    startDate: '',
+    endDate: '',
   });
 
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [venue, setVenue] = useState<IVenue | null>(null);
+
 
   // Buscar escolas e tipos de eventos
   const { data: schools } = useQuery<ISchool[]>({
@@ -56,17 +71,52 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
     queryFn: () => EventTypeController.getEventTypes()
   });
 
+  const { data: venues } = useQuery<IVenue[]>({
+    queryKey: ["venues", formData.schoolId],
+    queryFn: () => VenueController.getVenuesSchool(Number(formData.schoolId)),
+    enabled: Boolean(formData.schoolId) && !isNaN(Number(formData.schoolId)),
+    initialData: event?.school.id === formData.schoolId ? [event.venue] : undefined
+  });
+
+  const { data: venuePictures } = useQuery<IVenuePicture[]>({
+    queryKey: ["venuePictures", formData.venueId],
+    queryFn: () => formData.venueId ? VenuePictureController.getPicturesByVenue(Number(formData.venueId)) : Promise.resolve([]),
+    enabled: Boolean(formData.venueId) && !isNaN(Number(formData.venueId))
+  });
+
   useEffect(() => {
     if (event) {
       setFormData({
-        schoolId: event.schoolId,
-        eventTypeId: event.eventTypeId,
         name: event.name,
         description: event.description || '',
         objective: event.objective || '',
         targetAudience: event.targetAudience || '',
         status: event.status,
-        isPublic: event.isPublic
+        isPublic: event.isPublic,
+        schoolId: event.school.id,
+        eventTypeId: event.eventType.id,
+        venueId: event.venue.id,
+        startDate: event.startDate,
+        endDate: event.endDate,
+      });
+    }
+  }, [event]);
+
+
+  // Sincroniza o venue quando o venueId ou venues mudam
+  useEffect(() => {
+    if (formData.venueId && venues) {
+      const selectedVenue = venues.find(v => v.id === formData.venueId);
+      setVenue(selectedVenue || null);
+    }
+  }, [formData.venueId, venues]);
+
+  // Garante que os venues são carregados quando o formulário é aberto para edição
+  useEffect(() => {
+    if (event && event.school.id && !venues) {
+      VenueController.getVenuesSchool(event.school.id).then(data => {
+        const selectedVenue = data.find(v => v.id === event.venue.id);
+        setVenue(selectedVenue || null);
       });
     }
   }, [event]);
@@ -97,6 +147,14 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  function handleStartDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const endDateInput = document.getElementById('endDate');
+    if (endDateInput instanceof HTMLInputElement) {
+      endDateInput.min = e.target.value;
+    }
+    handleChange(e);
   }
 
   return (
@@ -131,7 +189,10 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
             id="schoolId"
             name="schoolId"
             value={formData.schoolId}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              !e.target.value && setVenue(null);
+            }}
             required
           >
             <option value="">Selecione uma escola</option>
@@ -144,27 +205,144 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="eventTypeId">
-            <FiBook className={styles.inputIcon} />
-            Tipo de Evento *
+          <label htmlFor="venueId">
+            <FiMapPin className={styles.inputIcon} />
+            Local *
           </label>
-          <select
-            id="eventTypeId"
-            name="eventTypeId"
-            value={formData.eventTypeId}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Selecione um tipo</option>
-            {eventTypes?.map(eventType => (
-              <option key={eventType.id} value={eventType.id}>
-                {eventType.name}
-              </option>
-            ))}
-          </select>
+          {formData.schoolId ? (
+            venues && venues.length > 0 ? (
+              <select
+                id="venueId"
+                name="venueId"
+                value={formData.venueId}
+                onChange={(e) => {
+                  handleChange(e);
+                  setVenue(venues.find(v => v.id === Number(e.target.value)) || null);
+                }}
+                required
+              >
+                <option value="">Selecione um local</option>
+                {venues.map(venue => (
+                  <option key={venue.id} value={venue.id}>
+                    {venue.name} (Capacidade: {venue.capacity})
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <Alert
+                variant="error"
+                className={styles.alertVenueSchool}
+                children={"Esta escola não possui locais disponíveis."}
+              />
+            )
+          ) : (
+            <select id="venueId" name="venueId" className={styles.disabled} disabled>
+              <option value="">Selecione uma escola primeiro</option>
+            </select>
+          )}
         </div>
       </div>
 
+      {/* Seção para exibir detalhes do local selecionado */}
+      {venue && (
+        <div className={styles.venueDetails}>
+          <h3 className={styles.venueDetailsTitle}>Detalhes do Local</h3>
+          <div className={styles.venueInfo}>
+            <div className={styles.venueInfoItem}>
+              <BiSolidSchool className={styles.venueInfoIcon} />
+              <span>Local: {venue.name}</span>
+            </div>
+            <div className={styles.venueInfoItem}>
+              <FiMapPin className={styles.venueInfoIcon} />
+              <span>Endereço: {venue.address}</span>
+            </div>
+            <div className={styles.venueInfoItem}>
+              <FiUsers className={styles.venueInfoIcon} />
+              <span>Capacidade: {venue.capacity} {venue.capacity > 1 ? "pessoas" : "pessoa"}</span>
+            </div>
+            <div className={styles.venueInfoItem}>
+              <IoRainy className={styles.venueInfoIcon} />
+              <span>Interno: {venue.isInternal ? "Sim" : "Não"}</span>
+            </div>
+          </div>
+
+          {venuePictures && venuePictures.length > 0 && (
+            <div className={styles.venuePictures}>
+              <h4>Fotos</h4>
+              <div className={styles.venuePicturesGrid}>
+                {venuePictures.map(picture => (
+                  <div key={picture.id} className={styles.venuePicture}>
+                    <img
+                      src={picture.pictureUrl}
+                      alt={`Local ${venue.name}`}
+                      className={styles.venuePictureImage}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className={styles.formGroup}>
+        <label htmlFor="eventTypeId">
+          <MdOutlineFormatListBulleted className={styles.inputIcon} />
+          Tipo de Evento *
+        </label>
+        <select
+          id="eventTypeId"
+          name="eventTypeId"
+          value={formData.eventTypeId}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Selecione um tipo</option>
+          {eventTypes?.map(eventType => (
+            <option key={eventType.id} value={eventType.id}>
+              {eventType.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className={styles.formRow}>
+        <div className={styles.formGroup}>
+          <label htmlFor="startDate">
+            <TbCalendar className={styles.inputIcon} />
+            Data de início *
+          </label>
+          <input
+            type="datetime-local"
+            name="startDate"
+            id="startDate"
+            min={getFormattedDate(new Date(), { startOfDay: true })}
+            defaultValue={event?.startDate
+              ? getFormattedDate(new Date(event.startDate))
+              : getFormattedDate(new Date())}
+            onChange={handleStartDateChange}
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="endDate">
+            <TbCalendarCheck className={styles.inputIcon} />
+            Data final *
+          </label>
+          <input
+            type="datetime-local"
+            name="endDate"
+            id="endDate"
+            min={getFormattedDate(new Date())}
+            defaultValue={event?.endDate
+              ? getFormattedDate(new Date(event.endDate))
+              : getFormattedDate(new Date(), { daysOffset: 1 })}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      {/* Restante do formulário permanece igual */}
       <div className={styles.formGroup}>
         <label htmlFor="description">
           Descrição

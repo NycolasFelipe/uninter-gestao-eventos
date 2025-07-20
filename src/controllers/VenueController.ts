@@ -11,6 +11,10 @@ class VenueController extends BaseController {
     return this.get(endpoint);
   }
 
+  async getVenuesSchool(id: number): Promise<IVenue[]> {
+    return this.get(`${endpoint}/school/${id}`);
+  }
+
   async createVenue(venue: IVenueCreate): Promise<IVenueCreateResponse> {
     return this.post(endpoint, venue);
   }

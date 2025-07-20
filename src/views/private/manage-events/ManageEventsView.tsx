@@ -27,15 +27,20 @@ import EventStatusTraduzido from 'src/enum/EventStatusTraduzido';
 
 const ManageEventsView = () => {
   const [activeTab, setActiveTab] = useState<'events' | 'eventTypes'>('events');
+
+  // Event
   const [selectedEvent, setSelectedEvent] = useState<IEvent>();
-  const [selectedEventType, setSelectedEventType] = useState<IEventType>();
   const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
   const [isEditEventModalOpen, setIsEditEventModalOpen] = useState(false);
+  const [isDeleteEventModalOpen, setIsDeleteEventModalOpen] = useState(false);
+
+  // Event type
+  const [selectedEventType, setSelectedEventType] = useState<IEventType>();
   const [isCreateEventTypeModalOpen, setIsCreateEventTypeModalOpen] = useState(false);
   const [isEditEventTypeModalOpen, setIsEditEventTypeModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isDeleteEventModalOpen, setIsDeleteEventModalOpen] = useState(false);
   const [isDeleteEventTypeModalOpen, setIsDeleteEventTypeModalOpen] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState('');
   const [itemToDelete, setItemToDelete] = useState<{ id: number, type: 'event' | 'eventType' } | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
@@ -125,6 +130,9 @@ const ManageEventsView = () => {
     }
   }
 
+  console.log(events);
+
+
   return (
     <div className={styles.manageEventsContainer}>
       <header className={styles.pageHeader}>
@@ -210,8 +218,9 @@ const ManageEventsView = () => {
                 <thead>
                   <tr>
                     <th>Nome</th>
-                    <th>Escola</th>
                     <th>Tipo</th>
+                    <th>Escola</th>
+                    <th>Dia de início</th>
                     <th>Status</th>
                     <th>Ações</th>
                   </tr>
@@ -221,8 +230,9 @@ const ManageEventsView = () => {
                     filteredEvents.map((event) => (
                       <tr key={event.id}>
                         <td>{event.name}</td>
-                        <td>{event.school?.name || event.schoolId}</td>
-                        <td>{event.eventType?.name || event.eventTypeId}</td>
+                        <td>{event.eventType.name}</td>
+                        <td>{event.school.name}</td>
+                        <td>{new Date(event.startDate).toLocaleDateString()}</td>
                         <td>
                           <span className={classNames(
                             styles.statusBadge,

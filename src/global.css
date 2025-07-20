@@ -151,6 +151,10 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.2);
 }
 
+select {
+  cursor: pointer;
+}
+
 ::placeholder {
   color: #999999;
   opacity: 1;

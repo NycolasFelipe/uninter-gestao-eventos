@@ -5,13 +5,15 @@ import styles from './EventDetail.module.css';
 import {
   FiBook,
   FiHome,
-  FiTarget,
   FiUsers,
   FiGlobe,
   FiUser,
   FiInfo,
-  FiClock
+  FiClock,
+  FiMapPin,
+  FiImage
 } from 'react-icons/fi';
+import { MdOutlineFormatListBulleted } from 'react-icons/md';
 
 // Components
 import Button from 'src/components/button/Button';
@@ -19,6 +21,11 @@ import Button from 'src/components/button/Button';
 // Interfaces
 import type { IEvent } from 'src/interfaces/IEvent';
 import EventStatus from 'src/enum/EventStatus';
+import { useQuery } from '@tanstack/react-query';
+import type { IVenuePicture } from 'src/interfaces/IVenue';
+
+// Controllers
+import VenuePictureController from 'src/controllers/VenuePictureController';
 
 interface EventDetailProps {
   event: IEvent;
@@ -28,6 +35,14 @@ interface EventDetailProps {
 type EventStatusType = typeof EventStatus[keyof typeof EventStatus];
 
 const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
+  const { data: venuePictures } = useQuery<IVenuePicture[]>({
+    queryKey: ["venuePictures", event.venue.id],
+    queryFn: () => event.venue.id
+      ? VenuePictureController.getPicturesByVenue(Number(event.venue.id))
+      : Promise.resolve([]),
+    enabled: Boolean(event.venue.id) && !isNaN(Number(event.venue.id))
+  });
+
   const getStatusClass = (status: EventStatusType) => {
     switch (status) {
       case EventStatus.Draft: return styles.statusDraft;
@@ -41,37 +56,46 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
     }
   }
 
+  const formatDate = (dateString: string) => {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleString('pt-BR');
+  }
+
   return (
     <div className={styles.eventDetail}>
-      <div className={styles.eventHeader}>
-        <h2 className={styles.eventName}>{event.name}</h2>
-        <p className={styles.eventDescription}>{event.description}</p>
-      </div>
-
       <div className={styles.detailSection}>
-        <h3 className={styles.sectionTitle}>
-          <FiInfo className={styles.sectionIcon} />
+        <h5 className={styles.sectionTitle}>
           Informações Gerais
-        </h3>
+        </h5>
 
         <div className={styles.detailGrid}>
+          <div className={styles.detailItem}>
+            <div className={styles.detailLabel}>
+              <FiBook className={styles.detailIcon} />
+              <span>Nome</span>
+            </div>
+            <div className={styles.detailValue}>
+              {event.name || '-'}
+            </div>
+          </div>
           <div className={styles.detailItem}>
             <div className={styles.detailLabel}>
               <FiHome className={styles.detailIcon} />
               <span>Escola</span>
             </div>
             <div className={styles.detailValue}>
-              {event.school?.name || event.schoolId}
+              {event.school?.name || '-'}
             </div>
           </div>
 
           <div className={styles.detailItem}>
             <div className={styles.detailLabel}>
-              <FiBook className={styles.detailIcon} />
-              <span>Tipo de Evento</span>
+              <MdOutlineFormatListBulleted className={styles.detailIcon} />
+              <span>Tipo</span>
             </div>
             <div className={styles.detailValue}>
-              {event.eventType?.name || event.eventTypeId}
+              {event.eventType?.name || '-'}
             </div>
           </div>
 
@@ -103,44 +127,126 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
               <span>Organizador</span>
             </div>
             <div className={styles.detailValue}>
-              {event.organizer?.firstName} {event.organizer?.lastName}
+              {event.organizer?.firstName ? `${event.organizer.firstName} ${event.organizer.lastName}` : '-'}
+              {event.organizer?.email && (
+                <div className={styles.detailSubtext}>{event.organizer.email}</div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
+      <div className={styles.detailSection}>
+        <h5 className={styles.sectionTitle}>
+          Datas
+        </h5>
+        <div className={styles.detailGrid}>
+          <div className={styles.detailItem}>
+            <div className={styles.detailLabel}>
+              <FiClock className={styles.detailIcon} />
+              <span>Início</span>
+            </div>
+            <div className={styles.detailValue}>
+              {formatDate(event.startDate)}
+            </div>
+          </div>
+          <div className={styles.detailItem}>
+            <div className={styles.detailLabel}>
+              <FiClock className={styles.detailIcon} />
+              <span>Final</span>
+            </div>
+            <div className={styles.detailValue}>
+              {formatDate(event.endDate)}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {event.venue && (
+        <div className={styles.detailSection}>
+          <h5 className={styles.sectionTitle}>
+            Local
+          </h5>
+          <div className={styles.detailGrid}>
+            <div className={styles.detailItem}>
+              <div className={styles.detailLabel}>
+                <FiHome className={styles.detailIcon} />
+                <span>Nome</span>
+              </div>
+              <div className={styles.detailValue}>
+                {event.venue.name || '-'}
+              </div>
+            </div>
+            <div className={styles.detailItem}>
+              <div className={styles.detailLabel}>
+                <FiMapPin className={styles.detailIcon} />
+                <span>Endereço</span>
+              </div>
+              <div className={styles.detailValue}>
+                {event.venue.address || '-'}
+              </div>
+            </div>
+            <div className={styles.detailItem}>
+              <div className={styles.detailLabel}>
+                <FiUsers className={styles.detailIcon} />
+                <span>Capacidade</span>
+              </div>
+              <div className={styles.detailValue}>
+                {event.venue.capacity || '-'}
+              </div>
+            </div>
+          </div>
+          {venuePictures && venuePictures.length > 0 && (
+            <div className={styles.venuePictures}>
+              <div className={styles.detailLabel}>
+                <FiImage className={styles.detailIcon} />
+                Fotos do Local
+              </div>
+              <div className={styles.venuePicturesGrid}>
+                {venuePictures.map(picture => (
+                  <div key={picture.id} className={styles.venuePicture}>
+                    <img
+                      src={picture.pictureUrl}
+                      alt={`Local ${event.venue?.name}`}
+                      className={styles.venuePictureImage}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {event.objective && (
         <div className={styles.detailSection}>
-          <h3 className={styles.sectionTitle}>
-            <FiTarget className={styles.sectionIcon} />
+          <h5 className={styles.sectionTitle}>
             Objetivo
-          </h3>
+          </h5>
           <p className={styles.detailText}>{event.objective}</p>
         </div>
       )}
 
       {event.targetAudience && (
         <div className={styles.detailSection}>
-          <h3 className={styles.sectionTitle}>
-            <FiUsers className={styles.sectionIcon} />
+          <h5 className={styles.sectionTitle}>
             Público-Alvo
-          </h3>
+          </h5>
           <p className={styles.detailText}>{event.targetAudience}</p>
         </div>
       )}
 
       <div className={styles.detailSection}>
-        <h3 className={styles.sectionTitle}>
-          <FiClock className={styles.sectionIcon} />
+        <h5 className={styles.sectionTitle}>
           Histórico de Atualizações
-        </h3>
+        </h5>
         <div className={styles.historyItem}>
           <div className={styles.historyDate}>01/01/2023 10:30</div>
-          <div className={styles.historyAction}>Evento criado por João Silva</div>
+          <div className={styles.historyAction}>Evento criado por {event.organizer?.firstName || 'Organizador'}</div>
         </div>
         <div className={styles.historyItem}>
           <div className={styles.historyDate}>05/01/2023 14:15</div>
-          <div className={styles.historyAction}>Status alterado para Planejado</div>
+          <div className={styles.historyAction}>Status alterado para {event.status}</div>
         </div>
       </div>
 
