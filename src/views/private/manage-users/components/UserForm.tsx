@@ -92,10 +92,8 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSuccess, onCancel }) => {
 
     try {
       if (user) {
-        // Atualizar usuário existente
         await UserController.updateUser(formData, user.id);
       } else {
-        // Criar novo usuário
         await UserController.createUser(formData);
       }
       onSuccess();
