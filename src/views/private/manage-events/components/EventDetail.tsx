@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import styles from './EventDetail.module.css';
 
@@ -20,9 +21,9 @@ import Button from 'src/components/button/Button';
 
 // Interfaces
 import type { IEvent } from 'src/interfaces/IEvent';
-import EventStatus from 'src/enum/EventStatus';
-import { useQuery } from '@tanstack/react-query';
 import type { IVenuePicture } from 'src/interfaces/IVenue';
+import EventStatus from 'src/enum/EventStatus';
+import EventStatusTraduzido from 'src/enum/EventStatusTraduzido';
 
 // Controllers
 import VenuePictureController from 'src/controllers/VenuePictureController';
@@ -106,7 +107,7 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
             </div>
             <div className={styles.detailValue}>
               <span className={classNames(styles.statusBadge, getStatusClass(event.status))}>
-                {event.status}
+                {EventStatusTraduzido[event.status]}
               </span>
             </div>
           </div>
@@ -246,7 +247,7 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
         </div>
         <div className={styles.historyItem}>
           <div className={styles.historyDate}>05/01/2023 14:15</div>
-          <div className={styles.historyAction}>Status alterado para {event.status}</div>
+          <div className={styles.historyAction}>Status alterado para {EventStatusTraduzido[event.status]}</div>
         </div>
       </div>
 
