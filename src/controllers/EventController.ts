@@ -12,6 +12,10 @@ class EventController extends BaseController {
     return this.get(endpoint);
   }
 
+  async getEventsByStatus(status: string = "Draft, Planned, Published, Ongoing"): Promise<IEvent[]> {
+    return this.get(`${endpoint}?status=${status}`);
+  }
+
   async getEventById(id: number): Promise<IEvent> {
     return this.get(`${endpoint}/${id}`);
   }
