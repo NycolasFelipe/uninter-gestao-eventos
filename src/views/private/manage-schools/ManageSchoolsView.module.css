@@ -86,7 +86,7 @@
 .tableContainer {
   overflow-x: auto;
   border: 1px solid var(--clr-border-subtle);
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .schoolsTable {

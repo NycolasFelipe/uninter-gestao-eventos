@@ -84,7 +84,7 @@
 .tableContainer {
   overflow-x: auto;
   border: 1px solid var(--clr-border-subtle);
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .eventsTable,
@@ -118,7 +118,7 @@
 .statusBadge {
   display: inline-block;
   padding: 4px 10px;
-  border-radius: 12px;
+  border-radius: 6px;
   font-size: var(--font-size-sm);
   font-weight: 600;
 }

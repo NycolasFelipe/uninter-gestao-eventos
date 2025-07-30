@@ -91,7 +91,7 @@
   width: 100%;
   padding: var(--spacing-md);
   border: 2px solid var(--clr-border-subtle);
-  border-radius: 8px;
+  border-radius: 6px;
   margin-top: var(--spacing-xs);
 }
 

@@ -1,7 +1,7 @@
 .eventForm {
   max-width: 800px;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
@@ -60,7 +60,7 @@
 .formGroup select,
 .formGroup textarea {
   border: 1px solid var(--clr-border-subtle);
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: var(--font-size-md);
   transition: all 0.2s ease;
   padding: var(--spacing-sm);
@@ -104,7 +104,7 @@
   margin: var(--spacing-sm) 0;
   padding: var(--spacing-md);
   border: 1px solid var(--clr-border-subtle);
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: var(--clr-neutral-white);
 }
 
@@ -156,7 +156,7 @@
 
 .venuePicture {
   border: 1px solid var(--clr-border-subtle);
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
 }
 

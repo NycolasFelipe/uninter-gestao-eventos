@@ -133,7 +133,7 @@
   background-color: #e9f5ee;
   color: var(--clr-primary-green);
   padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: var(--font-size-sm);
   text-align: center;
   min-width: 160px;
@@ -154,7 +154,7 @@
   color: var(--clr-neutral-white);
   padding: var(--spacing-xs) var(--spacing-sm);
   font-size: var(--font-size-sm);
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .actions {
