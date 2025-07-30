@@ -1,85 +1,92 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './HomeView.module.css';
 
 // Lib
 import classNames from 'classnames';
 
 // Icons
-import { FaRegCalendarAlt, FaRegCalendarPlus } from 'react-icons/fa';
-import { GrAnnounce } from 'react-icons/gr';
-import { RiRocket2Line } from 'react-icons/ri';
-import { HiAnnotation } from 'react-icons/hi';
-import { TbReportSearch } from 'react-icons/tb';
+import { FiHome } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
+import { BiSolidSchool } from 'react-icons/bi';
+import { RiRocket2Line } from 'react-icons/ri';
+import { MdOutlineManageAccounts } from 'react-icons/md';
+import { FaRegCalendarPlus } from 'react-icons/fa';
 
-// Interfaces
-import type IEvent from 'src/interfaces/IEvent';
-import type Announcement from 'src/interfaces/IAnnouncement';
+// Context
 import AuthContext from 'src/contexts/AuthContext';
 
-const upcomingEvents: IEvent[] = [
-  {
-    id: 1,
-    name: 'Feira de Ciências 2025',
-    date: '15/06/2025',
-    description: 'Feira de ciências anual da escola, apresentando projetos inovadores dos alunos.'
-  },
-  {
-    id: 2,
-    name: 'Exposição de Arte: "Cores da Primavera"',
-    date: '02/2025/07',
-    description: 'Uma exposição vibrante de obras de arte de alunos de todas as séries.'
-  },
-  {
-    id: 3,
-    name: 'Dia Anual do Esporte',
-    date: '20/07/2025',
-    description: 'Eventos emocionantes de atletismo, esportes em equipe e diversão para todos.'
-  },
-  {
-    id: 4,
-    name: 'Noite de Gala Musical',
-    date: '05/08/2025',
-    description: 'Uma noite de maravilhosas apresentações musicais pelos nossos talentosos alunos.'
-  },
-];
+// Components
+import Header from './components/Header';
 
-const recentAnnouncements: Announcement[] = [
-  {
-    id: 1,
-    title: 'Bem-vindo à Plataforma Transforma Educação!',
-    message: 'Estamos animados com o lançamento da nossa nova plataforma integrada para gerenciar eventos escolares. Explore e participe!',
-    date: '20/05/2025'
-  },
-  {
-    id: 2,
-    title: 'Chamada para Voluntários: Feira de Ciências',
-    message: 'Precisamos de voluntários entre pais e professores para ajudar a tornar a Feira de Ciências um sucesso. Inscreva/se até 30 de maio.',
-    date: '22/05/2025'
-  },
-  {
-    id: 3,
-    title: 'Calendário Escolar Atualizado',
-    message: 'O calendário escolar do próximo trimestre foi atualizado. Verifique a seção de eventos.',
-    date: '24/05/2025'
-  },
-];
+// const upcomingEvents: IEvent[] = [
+//   {
+//     id: 1,
+//     name: 'Feira de Ciências 2025',
+//     date: '15/06/2025',
+//     description: 'Feira de ciências anual da escola, apresentando projetos inovadores dos alunos.'
+//   },
+//   {
+//     id: 2,
+//     name: 'Exposição de Arte: "Cores da Primavera"',
+//     date: '02/2025/07',
+//     description: 'Uma exposição vibrante de obras de arte de alunos de todas as séries.'
+//   },
+//   {
+//     id: 3,
+//     name: 'Dia Anual do Esporte',
+//     date: '20/07/2025',
+//     description: 'Eventos emocionantes de atletismo, esportes em equipe e diversão para todos.'
+//   },
+//   {
+//     id: 4,
+//     name: 'Noite de Gala Musical',
+//     date: '05/08/2025',
+//     description: 'Uma noite de maravilhosas apresentações musicais pelos nossos talentosos alunos.'
+//   },
+// ];
+
+// const recentAnnouncements: Announcement[] = [
+//   {
+//     id: 1,
+//     title: 'Bem-vindo à Plataforma Transforma Educação!',
+//     message: 'Estamos animados com o lançamento da nossa nova plataforma integrada para gerenciar eventos escolares. Explore e participe!',
+//     date: '20/05/2025'
+//   },
+//   {
+//     id: 2,
+//     title: 'Chamada para Voluntários: Feira de Ciências',
+//     message: 'Precisamos de voluntários entre pais e professores para ajudar a tornar a Feira de Ciências um sucesso. Inscreva/se até 30 de maio.',
+//     date: '22/05/2025'
+//   },
+//   {
+//     id: 3,
+//     title: 'Calendário Escolar Atualizado',
+//     message: 'O calendário escolar do próximo trimestre foi atualizado. Verifique a seção de eventos.',
+//     date: '24/05/2025'
+//   },
+// ];
 
 interface HomeViewProps {
   userName?: string;
 }
 
 const HomeView: React.FC<HomeViewProps> = () => {
-  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+
   return (
     <div className={styles.homeContainer}>
-      <header className={styles.pageHeader}>
+      <Header
+        user={user}
+        onLogout={logout}
+      />
+      {/* <header className={styles.pageHeader}>
         <h1>Bem-vindo(a) de volta, {user.name}!</h1>
         <p>Seu hub central para eventos escolares, comunicados e contato com a comunidade.</p>
-      </header>
+      </header> */}
 
-      <section className={styles.section}>
+      {/* <section className={styles.section}>
         <h2 className={styles.sectionTitle}><FaRegCalendarAlt /> Próximos Eventos</h2>
         {upcomingEvents.length > 0 ? (
           <div className={styles.cardGrid}>
@@ -100,9 +107,9 @@ const HomeView: React.FC<HomeViewProps> = () => {
         <div className={styles.seeAllLink}>
           <Link to="/events" className={styles.link}>Ver todos os eventos &rarr;</Link>
         </div>
-      </section>
+      </section> */}
 
-      <section className={styles.section}>
+      {/* <section className={styles.section}>
         <h2 className={styles.sectionTitle}><GrAnnounce /> Anúncios Recentes</h2>
         {recentAnnouncements.length > 0 ? (
           <ul className={styles.announcementList}>
@@ -120,22 +127,25 @@ const HomeView: React.FC<HomeViewProps> = () => {
         <div className={styles.seeAllLink}>
           <Link to="/announcements" className={styles.link}>Ver todos os anúncios &rarr;</Link>
         </div>
-      </section>
+      </section> */}
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}><RiRocket2Line /> Ações Rápidas</h2>
+        <h2 className={styles.sectionTitle}><RiRocket2Line /> Ações</h2>
         <div className={styles.quickActionsGrid}>
-          <button className={classNames("button-primary", styles.quickActionButton)}>
+          <button onClick={() => navigate("/manage/events")} className={classNames("button-primary", styles.quickActionButton)}>
             <FaRegCalendarPlus size={20} /> Planejar Novo Evento
           </button>
-          <button className={classNames("button-secondary", styles.quickActionButton)}>
-            <HiAnnotation size={20} /> Criar Anúncio
+          <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
+            <CgProfile size={20} /> Gerenciar Usuários
           </button>
-          <button className={classNames("button-secondary", styles.quickActionButton)}>
-            <TbReportSearch size={20} /> Ver Relatórios
+          <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
+            <BiSolidSchool size={20} /> Gerenciar Escolas
           </button>
-          <button className={classNames("button-secondary", styles.quickActionButton)}>
-            <CgProfile size={20} /> Meu Perfil
+          <button onClick={() => navigate("/manage/venues")} className={classNames("button-secondary", styles.quickActionButton)}>
+            <FiHome size={20} /> Gerenciar Locais
+          </button>
+          <button onClick={() => navigate("/manage/venues")} className={classNames("button-secondary", styles.quickActionButton)}>
+            <MdOutlineManageAccounts size={20} /> Gerenciar Permissões
           </button>
         </div>
       </section>
