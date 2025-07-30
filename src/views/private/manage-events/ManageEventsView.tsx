@@ -7,6 +7,7 @@ import styles from './ManageEventsView.module.css';
 import Button from 'src/components/button/Button';
 import Alert from 'src/components/alert/Alert';
 import Modal from 'src/components/modal/base/Modal';
+import Header from 'src/components/header/Header';
 import EventForm from './components/EventForm';
 import EventDetail from './components/EventDetail';
 import EventTypeForm from './components/EventTypeForm';
@@ -130,16 +131,12 @@ const ManageEventsView = () => {
     }
   }
 
-  console.log(events);
-
-
   return (
     <div className={styles.manageEventsContainer}>
-      <header className={styles.pageHeader}>
-        <h1>Gerenciamento de Eventos</h1>
-        <p>Gerencie eventos e tipos de eventos</p>
-        <div className={styles.headerAccent}></div>
-      </header>
+      <Header
+        title='Gerenciamento de Eventos'
+        description='Gerencie eventos e tipos de eventos'
+      />
 
       <div className={styles.tabs}>
         <button

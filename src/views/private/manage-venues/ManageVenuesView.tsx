@@ -14,6 +14,7 @@ import { TbRefresh } from 'react-icons/tb';
 import Button from 'src/components/button/Button';
 import Alert from 'src/components/alert/Alert';
 import Modal from 'src/components/modal/base/Modal';
+import Header from 'src/components/header/Header';
 import VenueForm from './components/VenueForm';
 import VenueDetail from './components/VenueDetail';
 import ConfirmationModal from 'src/components/modal/confirmation/ConfirmationModal';
@@ -100,11 +101,10 @@ const ManageVenuesView = () => {
 
   return (
     <div className={styles.manageVenuesContainer}>
-      <header className={styles.pageHeader}>
-        <h1>Gerenciamento de Locais</h1>
-        <p>Gerencie os locais cadastrados no sistema</p>
-        <div className={styles.headerAccent}></div>
-      </header>
+      <Header
+        title='Gerenciamento de Locais'
+        description='Gerencie os locais cadastrados no sistema'
+      />
 
       <div className={styles.controlsSection}>
         <div className={styles.searchContainer}>

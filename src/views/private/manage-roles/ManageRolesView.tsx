@@ -14,6 +14,7 @@ import PermissionController from 'src/controllers/PermissionController';
 import Button from 'src/components/button/Button';
 import Alert from 'src/components/alert/Alert';
 import Modal from 'src/components/modal/base/Modal';
+import Header from 'src/components/header/Header';
 import RoleForm from './components/RoleForm';
 import RoleDetail from './components/RoleDetail';
 import PermissionManager from './components/PermissionManager';
@@ -221,11 +222,10 @@ const ManageRolesView = () => {
 
   return (
     <div className={styles.manageRolesContainer}>
-      <header className={styles.pageHeader}>
-        <h1>Gerenciamento de Cargos e Permissões</h1>
-        <p>Gerencie cargos e permissões de acesso ao sistema</p>
-        <div className={styles.headerAccent}></div>
-      </header>
+      <Header
+        title='Gerenciamento de Cargos e Permissões'
+        description='Gerencie cargos e permissões de acesso ao sistema'
+      />
 
       <div className={styles.tabs}>
         <button

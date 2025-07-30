@@ -4,42 +4,6 @@
   margin: var(--spacing-lg) auto;
 }
 
-.pageHeader {
-  margin-bottom: var(--spacing-xl);
-  text-align: left;
-  padding-bottom: var(--spacing-md);
-  position: relative;
-  max-width: 800px;
-}
-
-.pageHeader h1 {
-  font-family: var(--font-heading);
-  color: var(--clr-primary-green);
-  font-size: 2.5rem;
-  margin-bottom: var(--spacing-xs);
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-}
-
-.pageHeader p {
-  font-size: var(--font-size-lg);
-  color: var(--clr-text-main);
-  opacity: 0.9;
-  max-width: 600px;
-  line-height: 1.5;
-}
-
-.headerAccent {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 80px;
-  height: 4px;
-  background: var(--clr-primary-green);
-  border-radius: 2px;
-}
-
 .tabs {
   display: flex;
   border-bottom: 1px solid var(--clr-border-subtle);

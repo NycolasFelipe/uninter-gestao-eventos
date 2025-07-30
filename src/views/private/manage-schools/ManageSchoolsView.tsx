@@ -12,6 +12,7 @@ import SchoolController from 'src/controllers/SchoolController';
 import Button from 'src/components/button/Button';
 import Alert from 'src/components/alert/Alert';
 import Modal from 'src/components/modal/base/Modal';
+import Header from 'src/components/header/Header';
 import SchoolForm from './components/SchoolForm';
 import SchoolDetail from './components/SchoolDetail';
 import ConfirmationModal from 'src/components/modal/confirmation/ConfirmationModal';
@@ -80,11 +81,10 @@ const ManageSchoolsView = () => {
 
   return (
     <div className={styles.manageSchoolsContainer}>
-      <header className={styles.pageHeader}>
-        <h1>Gerenciamento de Escolas</h1>
-        <p>Gerencie as escolas cadastradas no sistema</p>
-        <div className={styles.headerAccent}></div>
-      </header>
+      <Header
+        title='Gerenciamento de Escolas'
+        description='Gerencie as escolas cadastradas no sistema'
+      />
 
       <div className={styles.controlsSection}>
         <div className={styles.searchContainer}>

@@ -13,6 +13,7 @@ import UserController from 'src/controllers/UserController';
 import Button from 'src/components/button/Button';
 import Alert from 'src/components/alert/Alert';
 import Modal from 'src/components/modal/base/Modal';
+import Header from 'src/components/header/Header';
 import UserForm from './components/UserForm';
 import UserDetail from './components/UserDetail';
 import ConfirmationModal from 'src/components/modal/confirmation/ConfirmationModal';
@@ -92,11 +93,10 @@ const ManageUsersView = () => {
 
   return (
     <div className={styles.manageUsersContainer}>
-      <header className={styles.pageHeader}>
-        <h1>Gerenciamento de Usuários</h1>
-        <p>Gerencie contas de usuários, permissões e acesso ao sistema</p>
-        <div className={styles.headerAccent}></div>
-      </header>
+      <Header
+        title='Gerenciamento de Usuários'
+        description='Gerencie contas de usuários, permissões e acesso ao sistema'
+      />
 
       <div className={styles.controlsSection}>
         <div className={styles.searchContainer}>

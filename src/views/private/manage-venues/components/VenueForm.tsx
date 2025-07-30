@@ -45,16 +45,16 @@ const VenueForm: React.FC<VenueFormProps> = ({ venue, onSuccess, onCancel }) => 
 
   const { data: schools, isLoading: isLoadingSchools } = useQuery<ISchool[]>({
     queryKey: ["schools"],
-    queryFn: SchoolController.getSchools
+    queryFn: () => SchoolController.getSchools()
   });
 
   const createPicturesMutation = useMutation({
-    mutationFn: VenuePictureController.createVenuePicture,
+    mutationFn: (pictures: IVenuePictureCreate[]) => VenuePictureController.createVenuePicture(pictures),
     onSuccess: () => onSuccess()
   });
 
   const removePictureMutation = useMutation({
-    mutationFn: VenuePictureController.deleteVenuePicture,
+    mutationFn: (id: number) => VenuePictureController.deleteVenuePicture(id),
     onSuccess: () => onSuccess()
   });
 
@@ -120,7 +120,7 @@ const VenueForm: React.FC<VenueFormProps> = ({ venue, onSuccess, onCancel }) => 
         ...p,
         venueId,
       }));
-      
+
       if (picturesWithVenueId.length > 0) {
         await createPicturesMutation.mutateAsync(picturesWithVenueId);
       }
