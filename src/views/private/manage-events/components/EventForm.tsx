@@ -318,7 +318,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
             type="datetime-local"
             name="startDate"
             id="startDate"
-            min={getFormattedDate(new Date(), { startOfDay: true })}
+            min={event ? undefined : getFormattedDate(new Date(), { startOfDay: true })}
             defaultValue={event?.startDate
               ? getFormattedDate(new Date(event.startDate))
               : formData.startDate}
@@ -335,7 +335,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
             type="datetime-local"
             name="endDate"
             id="endDate"
-            min={getFormattedDate(new Date())}
+            min={event ? undefined : getFormattedDate(new Date())}
             defaultValue={event?.endDate
               ? getFormattedDate(new Date(event.endDate))
               : formData.endDate}
