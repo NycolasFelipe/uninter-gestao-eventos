@@ -80,7 +80,9 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
 
   const { data: venuePictures } = useQuery<IVenuePicture[]>({
     queryKey: ["venuePictures", formData.venueId],
-    queryFn: () => formData.venueId ? VenuePictureController.getPicturesByVenue(Number(formData.venueId)) : Promise.resolve([]),
+    queryFn: () => formData.venueId
+      ? VenuePictureController.getPicturesByVenue(Number(formData.venueId))
+      : Promise.resolve([]),
     enabled: Boolean(formData.venueId) && !isNaN(Number(formData.venueId))
   });
 
@@ -106,7 +108,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
   // Sincroniza o venue quando o venueId ou venues mudam
   useEffect(() => {
     if (formData.venueId && venues) {
-      const selectedVenue = venues.find(v => v.id === formData.venueId);
+      const selectedVenue = venues.find(v => Number(v.id) === Number(formData.venueId));
       setVenue(selectedVenue || null);
     }
   }, [formData.venueId, venues]);
