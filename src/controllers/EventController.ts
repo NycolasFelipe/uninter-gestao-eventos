@@ -12,8 +12,16 @@ class EventController extends BaseController {
     return this.get(endpoint);
   }
 
-  async getEventsByStatus(status: string = "Draft, Planned, Published, Ongoing"): Promise<IEvent[]> {
-    return this.get(`${endpoint}?status=${status}`);
+  async getEventsByStatus(params: { status?: string[]; limit?: number }): Promise<IEvent[]> {
+    const DEFAULT_STATUS = ["Draft", "Planned", "Published", "Ongoing"];
+    const DEFAULT_LIMIT = 10;
+
+    const statusParams = params?.status?.join(", ") || DEFAULT_STATUS.join(", ");
+    const limitParams = params?.limit?.toString() || DEFAULT_LIMIT.toString();
+
+    const query = `?status=${statusParams}&limit=${limitParams}`;
+
+    return this.get(`${endpoint}${query}`);
   }
 
   async getEventById(id: number): Promise<IEvent> {
