@@ -128,6 +128,7 @@
 
 .quickActionButton {
   padding: var(--spacing-md) var(--spacing-lg);
+  padding-top: 12px;
   font-size: var(--font-size-md);
   font-weight: 600;
   text-align: center;
@@ -136,6 +137,10 @@
   align-items: center;
   gap: 12px;
   border-radius: 6px;
+}
+
+.quickActionButton .icon {
+  margin-top: 3px;
 }
 
 .emptyState {
@@ -162,6 +167,13 @@
   color: var(--clr-primary-green-darker);
   text-decoration: underline;
   text-decoration-color: var(--clr-primary-green-darker);
+}
+
+.organizerPicture {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {

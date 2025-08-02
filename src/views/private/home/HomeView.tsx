@@ -35,7 +35,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
   // Buscar eventos
   const { data: events, isLoading: isLoadingEvents, isError: isErrorEvents } = useQuery<IEvent[]>({
     queryKey: ["events"],
-    queryFn: () => EventController.getEventsByStatus()
+    queryFn: () => EventController.getEventsByStatus({ limit: 10 })
   });
 
   // Função para formatar a data
@@ -48,7 +48,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
       minute: '2-digit'
     };
     return new Date(dateString).toLocaleDateString('pt-BR', options);
-  };
+  }
 
   return (
     <div className={styles.homeContainer}>
@@ -95,7 +95,12 @@ const HomeView: React.FC<HomeViewProps> = () => {
                     <span className={styles.descricao}>escola</span>
                   </p>
                   <p title='Escola'>
-                    <CgProfile className={styles.icon} size={20} /> {event.organizer.firstName} {event.organizer.lastName}
+                    <img
+                      className={classNames(styles.icon, styles.organizerPicture)}
+                      src={event.organizer.profilePictureUrl}
+                      alt={`Foto de perfil de ${event.organizer.firstName} ${event.organizer.lastName}`}
+                    />
+                    {event.organizer.firstName} {event.organizer.lastName}
                     <span className={styles.descricao}>organizador do evento</span>
                   </p>
                 </div>
@@ -131,19 +136,19 @@ const HomeView: React.FC<HomeViewProps> = () => {
         <h2 className={styles.sectionTitle}><RiRocket2Line /> Ações</h2>
         <div className={styles.quickActionsGrid}>
           <button onClick={() => navigate("/manage/events")} className={classNames("button-primary", styles.quickActionButton)}>
-            <FaRegCalendarPlus size={20} /> Planejar Novo Evento
+            <FaRegCalendarPlus className={styles.icon} size={20} /> Planejar Novo Evento
           </button>
           <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
-            <CgProfile size={20} /> Gerenciar Usuários
+            <CgProfile className={styles.icon} size={20} /> Gerenciar Usuários
           </button>
           <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
-            <BiSolidSchool size={20} /> Gerenciar Escolas
+            <BiSolidSchool className={styles.icon} size={20} /> Gerenciar Escolas
           </button>
           <button onClick={() => navigate("/manage/venues")} className={classNames("button-secondary", styles.quickActionButton)}>
-            <FiHome size={20} /> Gerenciar Locais
+            <FiHome className={styles.icon} size={20} /> Gerenciar Locais
           </button>
           <button onClick={() => navigate("/manage/venues")} className={classNames("button-secondary", styles.quickActionButton)}>
-            <MdOutlineManageAccounts size={20} /> Gerenciar Permissões
+            <MdOutlineManageAccounts className={styles.icon} size={20} /> Gerenciar Permissões
           </button>
         </div>
       </section>
