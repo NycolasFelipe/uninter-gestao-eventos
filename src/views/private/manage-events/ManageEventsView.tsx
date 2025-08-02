@@ -48,13 +48,23 @@ const ManageEventsView = () => {
   const queryClient = useQueryClient();
 
   // Buscar eventos
-  const { data: events, isLoading: isLoadingEvents, isError: isErrorEvents, refetch: refetchEvents } = useQuery<IEvent[]>({
+  const {
+    data: events,
+    isLoading: isLoadingEvents,
+    isError: isErrorEvents,
+    refetch: refetchEvents
+  } = useQuery<IEvent[]>({
     queryKey: ["events"],
     queryFn: () => EventController.getEvents()
   });
 
   // Buscar tipos de eventos
-  const { data: eventTypes, isLoading: isLoadingEventTypes, isError: isErrorEventTypes, refetch: refetchEventTypes } = useQuery<IEventType[]>({
+  const {
+    data: eventTypes,
+    isLoading: isLoadingEventTypes,
+    isError: isErrorEventTypes,
+    refetch: refetchEventTypes
+  } = useQuery<IEventType[]>({
     queryKey: ["eventTypes"],
     queryFn: () => EventTypeController.getEventTypes()
   });
