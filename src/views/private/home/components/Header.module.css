@@ -18,7 +18,6 @@
   align-items: center;
   gap: 12px;
   margin: 0;
-  margin-left: -6px;
   margin-bottom: var(--spacing-sm);
   color: var(--clr-primary-green);
   font-weight: 600;

@@ -7,7 +7,7 @@
 }
 
 .pageHeader h1 {
-  font-family: var(--font-heading);
+  font-family: var(--font-slab);
   color: var(--clr-primary-green);
   font-size: 2.5rem;
   margin-bottom: var(--spacing-xs);
