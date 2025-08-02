@@ -51,8 +51,8 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
     schoolId: 0,
     eventTypeId: 0,
     venueId: 0,
-    startDate: '',
-    endDate: '',
+    startDate: getFormattedDate(new Date()),
+    endDate: getFormattedDate(new Date(), { daysOffset: 1 }),
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -319,7 +319,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
             min={getFormattedDate(new Date(), { startOfDay: true })}
             defaultValue={event?.startDate
               ? getFormattedDate(new Date(event.startDate))
-              : getFormattedDate(new Date())}
+              : formData.startDate}
             onChange={handleStartDateChange}
           />
         </div>
@@ -336,7 +336,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSuccess, onCancel }) => 
             min={getFormattedDate(new Date())}
             defaultValue={event?.endDate
               ? getFormattedDate(new Date(event.endDate))
-              : getFormattedDate(new Date(), { daysOffset: 1 })}
+              : formData.endDate}
             onChange={handleChange}
           />
         </div>
