@@ -7,12 +7,9 @@ import styles from './HomeView.module.css';
 import classNames from 'classnames';
 
 // Icons
-import { FiHome } from 'react-icons/fi';
-import { CgProfile } from 'react-icons/cg';
 import { BiSolidSchool } from 'react-icons/bi';
 import { RiRocket2Line } from 'react-icons/ri';
-import { MdOutlineManageAccounts } from 'react-icons/md';
-import { FaRegCalendarPlus, FaRegCalendarAlt } from 'react-icons/fa';
+import {  FaRegCalendarAlt } from 'react-icons/fa';
 
 // Context
 import AuthContext from 'src/contexts/AuthContext';
@@ -23,6 +20,9 @@ import Markdown from 'react-markdown';
 
 // Controller
 import EventController from 'src/controllers/EventController';
+
+// Config
+import ACTIONS from './config/actions';
 
 import type { IEvent } from 'src/interfaces/IEvent';
 interface HomeViewProps {
@@ -140,7 +140,23 @@ const HomeView: React.FC<HomeViewProps> = () => {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}><RiRocket2Line /> Ações</h2>
         <div className={styles.quickActionsGrid}>
-          <button onClick={() => navigate("/manage/events")} className={classNames("button-primary", styles.quickActionButton)}>
+          <div className={styles.quickActionsGrid}>
+            {ACTIONS.map((action) => {
+              const IconComponent = action.icon;
+              return (
+                <button
+                  key={action.path}
+                  onClick={() => navigate(action.path)}
+                  className={classNames(
+                    `button-${action.variant}`,
+                    styles.quickActionButton
+                  )}>
+                  <IconComponent className={styles.icon} size={20} /> {action.label}
+                </button>
+              );
+            })}
+          </div>
+          {/* <button onClick={() => navigate("/manage/events")} className={classNames("button-primary", styles.quickActionButton)}>
             <FaRegCalendarPlus className={styles.icon} size={20} /> Planejar Novo Evento
           </button>
           <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
@@ -154,7 +170,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
           </button>
           <button onClick={() => navigate("/manage/venues")} className={classNames("button-secondary", styles.quickActionButton)}>
             <MdOutlineManageAccounts className={styles.icon} size={20} /> Gerenciar Permissões
-          </button>
+          </button> */}
         </div>
       </section>
     </div>

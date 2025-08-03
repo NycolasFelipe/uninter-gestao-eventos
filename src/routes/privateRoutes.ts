@@ -5,6 +5,7 @@ import ManageSchoolsView from "src/views/private/manage-schools/ManageSchoolsVie
 import ManageUsersView from "src/views/private/manage-users/ManageUsersView";
 import ManageVenuesView from "src/views/private/manage-venues/ManageVenuesView";
 import ManageEventsView from "src/views/private/manage-events/ManageEventsView";
+import ManageSubscriptionsView from "src/views/private/manage-subscriptions/ManageSubscriptionsView";
 
 // Rotas privadas
 const privateRoutes = [
@@ -14,7 +15,8 @@ const privateRoutes = [
   { path: "/manage/venues", component: ManageVenuesView },
   { path: "/manage/roles", component: ManageRolesView },
   { path: "/manage/events", component: ManageEventsView },
-  { path: "/event/:id", component: EventDetailView, exact: true }
+  { path: "/event/:id", component: EventDetailView, exact: true },
+  { path: "/manage/subscriptions", component: ManageSubscriptionsView }
 ];
 
 export default privateRoutes;
