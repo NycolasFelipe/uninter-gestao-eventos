@@ -19,6 +19,7 @@ import AuthContext from 'src/contexts/AuthContext';
 
 // Components
 import Header from './components/Header';
+import Markdown from 'react-markdown';
 
 // Controller
 import EventController from 'src/controllers/EventController';
@@ -80,7 +81,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
               <div
                 key={event.id}
                 className={styles.card}
-                onClick={() => navigate(`/events/${event.id}`)}
+                onClick={() => navigate(`/event/${event.id}`)}
                 style={{ cursor: 'pointer' }}
               >
                 <div className={styles.cardHeader}>
@@ -105,13 +106,17 @@ const HomeView: React.FC<HomeViewProps> = () => {
                   </p>
                 </div>
                 <p className={styles.cardDescription}>
-                  {event.description || 'Sem descrição disponível'}
+                  <div className="markdown">
+                    <Markdown>
+                      {event.description || 'Sem descrição disponível'}
+                    </Markdown>
+                  </div>
                 </p>
                 <button
                   className={classNames('button-primary', styles.cardButton)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/events/${event.id}`);
+                    navigate(`/event/${event.id}`);
                   }}
                   aria-label={`Ver detalhes do evento ${event.name}`}
                 >
@@ -122,7 +127,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
           </div>
         ) : (
           <p className={styles.emptyState}>
-            <FaRegCalendarAlt /> Sem eventos futuros. Hora de planejar algo!
+            Sem eventos futuros.
           </p>
         )}
         <div className={styles.seeAllLink}>
@@ -141,7 +146,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
           <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
             <CgProfile className={styles.icon} size={20} /> Gerenciar Usuários
           </button>
-          <button onClick={() => navigate("/manage/users")} className={classNames("button-secondary", styles.quickActionButton)}>
+          <button onClick={() => navigate("/manage/schools")} className={classNames("button-secondary", styles.quickActionButton)}>
             <BiSolidSchool className={styles.icon} size={20} /> Gerenciar Escolas
           </button>
           <button onClick={() => navigate("/manage/venues")} className={classNames("button-secondary", styles.quickActionButton)}>
