@@ -14,7 +14,7 @@ const privateRoutes = [
   { path: "/manage/venues", component: ManageVenuesView },
   { path: "/manage/roles", component: ManageRolesView },
   { path: "/manage/events", component: ManageEventsView },
-  { path: "/eventos/:eventId", component: EventDetailView, exact: true }
+  { path: "/event/:id", component: EventDetailView, exact: true }
 ];
 
 export default privateRoutes;

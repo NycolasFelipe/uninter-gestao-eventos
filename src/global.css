@@ -259,3 +259,44 @@ h6 {
 #root {
   isolation: isolate;
 }
+
+.markdown * {
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  color: var(--clr-text-main);
+  background-color: var(--clr-neutral-white);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  color: var(--clr-text-main);
+}
+
+.markdown h1 {
+  font-size: 1.5rem;
+}
+
+.markdown h2 {
+  font-size: 1.3rem;
+}
+
+.markdown h3 {
+  font-size: 1.1rem;
+}
+
+.markdown p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}

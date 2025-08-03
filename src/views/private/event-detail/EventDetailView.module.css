@@ -1,0 +1,135 @@
+.container {
+  max-width: 1200px;
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) auto;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+.imageSection {
+  width: 100%;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-md);
+}
+
+.detailsSection,
+.locationSection,
+.organizerSection {
+  width: 100%;
+}
+
+.detailCard {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-sm);
+}
+
+.sectionTitle {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+}
+
+.eventDescription {
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xl);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.detailLabel {
+  font-size: var(--font-size-sm);
+  color: var(--clr-primary-green);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.detailLabel .icon {
+  margin-top: 2px;
+}
+
+.detailValue {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.venueDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.venueName {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.venueAddress,
+.venueInfo {
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.imageSection {
+  width: 100%;
+  margin-bottom: var(--spacing-md);
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.venueImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-sm);
+  transition: transform 0.3s ease;
+}
+
+.venueImage:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .venueImage {
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+}

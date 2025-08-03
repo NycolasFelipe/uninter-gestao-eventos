@@ -26,14 +26,22 @@ export interface IEvent {
     lastName: string;
     email: string;
     profilePictureUrl: string;
+    role: {
+      roleName: string;
+    }
   }
   venue: {
-    id: number,
-    schoolId: number,
-    name: string,
-    address: string,
-    capacity: number,
-    isInternal: boolean
+    id: number;
+    schoolId: number;
+    name: string;
+    address: string;
+    capacity: number;
+    isInternal: boolean;
+    venuePictures: Array<{
+      id: number;
+      venueId: number;
+      pictureUrl: string;
+    }>
   }
 }
 
