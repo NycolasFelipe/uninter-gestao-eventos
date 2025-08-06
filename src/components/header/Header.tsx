@@ -7,14 +7,18 @@ import { FaArrowLeft } from 'react-icons/fa';
 interface HeaderProps {
   title: string;
   description: string;
+  extra?: React.ReactNode;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, description }) => {
+const Header: React.FC<HeaderProps> = ({ title, description, extra }) => {
   const navigate = useNavigate();
   return (
     <header className={styles.pageHeader}>
       <div className={styles.content}>
-        <h1>{title}</h1>
+        <div className={styles.titleContainer}>
+          <h1>{title}</h1>
+          {extra && extra}
+        </div>
         <p>{description}</p>
         <div className={styles.headerAccent}></div>
       </div>

@@ -22,18 +22,19 @@ import Button from 'src/components/button/Button';
 // Interfaces
 import type { IEvent } from 'src/interfaces/IEvent';
 import type { IVenuePicture } from 'src/interfaces/IVenue';
-import EventStatus from 'src/enum/EventStatus';
 import EventStatusTraduzido from 'src/enum/EventStatusTraduzido';
 
 // Controllers
 import VenuePictureController from 'src/controllers/VenuePictureController';
 
+// Lib
+import formatDate from 'src/lib/formatDate';
+import getStatusClass from 'src/lib/getStatusClass';
+
 interface EventDetailProps {
   event: IEvent;
   onClose: () => void;
 }
-
-type EventStatusType = typeof EventStatus[keyof typeof EventStatus];
 
 const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
   const { data: venuePictures } = useQuery<IVenuePicture[]>({
@@ -43,25 +44,6 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
       : Promise.resolve([]),
     enabled: Boolean(event.venue.id) && !isNaN(Number(event.venue.id))
   });
-
-  const getStatusClass = (status: EventStatusType) => {
-    switch (status) {
-      case EventStatus.Draft: return styles.statusDraft;
-      case EventStatus.Planned: return styles.statusPlanned;
-      case EventStatus.Published: return styles.statusPublished;
-      case EventStatus.Ongoing: return styles.statusOngoing;
-      case EventStatus.Completed: return styles.statusCompleted;
-      case EventStatus.Cancelled: return styles.statusCancelled;
-      case EventStatus.Archived: return styles.statusArchived;
-      default: return '';
-    }
-  }
-
-  const formatDate = (dateString: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    return date.toLocaleString('pt-BR');
-  }
 
   return (
     <div className={styles.eventDetail}>
@@ -106,7 +88,7 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
               <span>Status</span>
             </div>
             <div className={styles.detailValue}>
-              <span className={classNames(styles.statusBadge, getStatusClass(event.status))}>
+              <span className={classNames(styles.statusBadge, getStatusClass(event.status, styles))}>
                 {EventStatusTraduzido[event.status]}
               </span>
             </div>
@@ -237,7 +219,7 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
         </div>
       )}
 
-      <div className={styles.detailSection}>
+      {/* <div className={styles.detailSection}>
         <h5 className={styles.sectionTitle}>
           Histórico de Atualizações
         </h5>
@@ -249,7 +231,7 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, onClose }) => {
           <div className={styles.historyDate}>05/01/2023 14:15</div>
           <div className={styles.historyAction}>Status alterado para {EventStatusTraduzido[event.status]}</div>
         </div>
-      </div>
+      </div> */}
 
       <div className={styles.actions}>
         <Button variant="secondary" onClick={onClose}>

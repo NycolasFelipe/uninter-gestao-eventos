@@ -8,6 +8,9 @@ import privateRoutes from "./routes/privateRoutes";
 // Hooks
 import useAuth from "./hooks/useAuth";
 
+// Components
+import ScrollToTop from "./components/scrollToTop/ScrollToTop";
+
 function App() {
   const auth = useAuth();
 
@@ -22,6 +25,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ ...auth }}>
       <Router>
+        <ScrollToTop />
         <Routes>
           {publicRoutes.map(({ path, component: Component }) => (
             <Route
