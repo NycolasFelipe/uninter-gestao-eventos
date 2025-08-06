@@ -8,9 +8,12 @@ import BaseController from "./BaseController";
 const endpoint = "/users";
 
 class UserController extends BaseController {
+  async getMyDetails(): Promise<IUserDetail> {
+    return this.get(`${endpoint}/my-details`);
+  }
+
   async getUserDetail(id: number): Promise<IUserDetail> {
-    const url = `${endpoint}/${id}/detail`;
-    return this.get(url);
+    return this.get(`${endpoint}/${id}/detail`);
   }
 
   async getUsers(): Promise<IUser[]> {

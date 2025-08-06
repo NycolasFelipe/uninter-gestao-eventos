@@ -15,6 +15,9 @@ import { FaRegCalendarAlt } from 'react-icons/fa';
 // Context
 import AuthContext from 'src/contexts/AuthContext';
 
+// Hooks
+import { usePermissions } from 'src/hooks/usePermissions';
+
 // Components
 import Header from './components/Header';
 import Markdown from 'react-markdown';
@@ -52,6 +55,12 @@ const HomeView: React.FC<HomeViewProps> = () => {
     queryFn: () => SubscriptionController.getSubscriptions()
   });
 
+  // Buscar permissões
+  const { hasPermission } = usePermissions();
+  const filteredActions = ACTIONS.filter(action =>
+    !action.requiredPermission || hasPermission(action.requiredPermission)
+  );
+
   return (
     <div className={styles.homeContainer}>
       <Header
@@ -63,7 +72,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
         <h2 className={styles.sectionTitle}><RiRocket2Line /> Ações</h2>
         <div className={styles.quickActionsGrid}>
           <div className={styles.quickActionsGrid}>
-            {ACTIONS.map((action) => {
+            {filteredActions.map((action) => {
               const IconComponent = action.icon;
               return (
                 <button
@@ -72,8 +81,10 @@ const HomeView: React.FC<HomeViewProps> = () => {
                   className={classNames(
                     `button-${action.variant}`,
                     styles.quickActionButton
-                  )}>
-                  <IconComponent className={styles.icon} size={20} /> {action.label}
+                  )}
+                >
+                  <span><IconComponent /></span>
+                  {action.label}
                 </button>
               );
             })}
