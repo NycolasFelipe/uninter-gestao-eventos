@@ -1,11 +1,11 @@
 /* Colors */
 :root {
-  --clr-primary-green: #34A853;
+  --clr-primary-green: #49b967;
+  --clr-primary-green-darker: #278440;
   --clr-neutral-white: #FFFFFF;
   --clr-text-main: #333333;
   --clr-text-on-primary: #FFFFFF;
   --clr-border-subtle: #CCCCCC;
-  --clr-primary-green-darker: #278440;
   --clr-red: #bd4a38;
   --clr-yellow: #f6c100;
 }
@@ -28,6 +28,13 @@
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
   --spacing-xxl: 3rem;
+}
+
+/* Other */
+:root {
+  /* Box shadow */
+  --box-shadow: 0 1px 12px #0000002f;
+  --box-shadow-light: 0 1px 1px #0000001f;
 }
 
 html {
@@ -299,6 +306,5 @@ h6 {
 }
 
 .markdown p {
-  margin-top: 0;
-  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-md);
 }

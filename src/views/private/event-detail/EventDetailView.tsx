@@ -17,14 +17,13 @@ import type { IEvent } from 'src/interfaces/IEvent';
 import type { ISubscription } from 'src/interfaces/ISubscription';
 
 // Icons
-import { TbCancel, TbTargetArrow } from 'react-icons/tb';
+import { TbCalendarTime, TbCancel, TbTargetArrow } from 'react-icons/tb';
 import { IoMdPeople } from 'react-icons/io';
 import { TbCalendar, TbCalendarCheck } from 'react-icons/tb';
 import { FaCheck, FaGlobe } from 'react-icons/fa';
 import { MdEventAvailable } from 'react-icons/md';
 
 // Enums
-import EventStatus from 'src/enum/EventStatus';
 import EventStatusTraduzido from 'src/enum/EventStatusTraduzido';
 
 // Lib
@@ -78,8 +77,22 @@ const EventDetailView = () => {
   const subscriptionIndex = (subscriptions || [])?.findIndex(sub => sub.event?.id === event?.id);
   const isSubscribed = subscriptionIndex > -1;
   const subscriptionDate = new Date(subscriptions?.[subscriptionIndex]?.createdAt || "").toLocaleDateString("pt-BR");
-  const isEventAvailableForSubscription = ([EventStatus.Published, EventStatus.Ongoing] as string[])
-    .includes(event?.status as string) && !event?.isPublic;
+
+  function getSubscriptionStatus(event: IEvent) {
+    const currentDate = new Date();
+    const eventEndDate = new Date(event.endDate);
+
+    if (eventEndDate <= currentDate) {
+      return 'closed';
+    }
+
+    const eventStartDate = new Date(event.startDate);
+    if (currentDate < eventStartDate) {
+      return 'not-available';
+    }
+
+    return 'available';
+  }
 
   const isLoading = isLoadingEvents || isLoadingSubscriptions;
   const isError = !event || isErrorEvents || isErrorSubscriptions;
@@ -168,31 +181,51 @@ const EventDetailView = () => {
               <div className={styles.eventPublic}>
                 <FaGlobe className={styles.icon} /> Não requer inscrição
               </div>
-            ) : !isEventAvailableForSubscription ? (
-              <div className={styles.eventClosed}>
-                <TbCancel className={styles.icon} /> Inscrições não estão mais disponíveis
-              </div>
             ) : (
-              <div className={styles.button}>
-                {isSubscribed ? (
-                  <button
-                    className={styles.subscribed}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => mutationUnsubscribe.mutate(event.id)}
-                  >
-                    {isHovered ? subscribeText.hover : subscribeText.default}
-                    {isHovered ? <TbCancel size={18} className={styles.icon} /> : <FaCheck size={14} className={styles.icon} />}
-                  </button>
-                ) : (
-                  <button
-                    className={styles.subscribe}
-                    onClick={() => mutationSubscribe.mutate(event.id)}
-                  >
-                    Inscrever-se <MdEventAvailable size={20} className={styles.icon} />
-                  </button>
-                )}
-              </div>
+              <>
+                {(() => {
+                  const subStatus = getSubscriptionStatus(event);
+
+                  if (subStatus === 'not-available') {
+                    return (
+                      <div className={styles.eventPending}>
+                        <TbCalendarTime className={styles.icon} /> Inscrições ainda não estão disponíveis
+                      </div>
+                    );
+                  }
+
+                  if (subStatus === 'closed') {
+                    return (
+                      <div className={styles.eventClosed}>
+                        <TbCancel className={styles.icon} /> Inscrições não estão mais disponíveis
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div className={styles.button}>
+                      {isSubscribed ? (
+                        <button
+                          className={styles.subscribed}
+                          onMouseEnter={() => setIsHovered(true)}
+                          onMouseLeave={() => setIsHovered(false)}
+                          onClick={() => mutationUnsubscribe.mutate(event.id)}
+                        >
+                          {isHovered ? subscribeText.hover : subscribeText.default}
+                          {isHovered ? <TbCancel size={18} className={styles.icon} /> : <FaCheck size={14} className={styles.icon} />}
+                        </button>
+                      ) : (
+                        <button
+                          className={styles.subscribe}
+                          onClick={() => mutationSubscribe.mutate(event.id)}
+                        >
+                          Inscrever-se <MdEventAvailable size={20} className={styles.icon} />
+                        </button>
+                      )}
+                    </div>
+                  );
+                })()}
+              </>
             )}
             {isSubscribed && (
               <div className={styles.info}>Inscreveu-se em {subscriptionDate}</div>

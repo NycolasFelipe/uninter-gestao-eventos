@@ -11,6 +11,8 @@ import AuthContext from 'src/contexts/AuthContext';
 
 // Lib
 import classNames from 'classnames';
+import Button from 'src/components/button/Button';
+import { CgLogIn } from 'react-icons/cg';
 
 export default function LoginView() {
   const navigate = useNavigate();
@@ -34,10 +36,9 @@ export default function LoginView() {
           </p>
           <ul className={styles.benefitsList}>
             <li><FiArrowRight /> Planejamento integrado de eventos</li>
-            <li><FiArrowRight /> Inscrições automatizadas</li>
+            <li><FiArrowRight /> Gerenciamento de inscrições</li>
+            <li><FiArrowRight /> Controle de acesso e permissões</li>
             <li><FiArrowRight /> Análise de participação em tempo real</li>
-            <li><FiArrowRight /> Relatórios detalhados</li>
-            <li><FiArrowRight /> Enquetes e feedback pós-evento</li>
           </ul>
         </div>
       </div>
@@ -54,7 +55,7 @@ export default function LoginView() {
                 E-mail institucional
               </label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -99,9 +100,12 @@ export default function LoginView() {
               </span>
             </div>
 
-            <button type="submit" className={`${styles.loginButton} button-primary`}>
-              Acessar plataforma
-            </button>
+            <Button
+              title="Acessar plataforma"
+              type="submit"
+              children="Acessar plataforma"
+              icon={<CgLogIn size={20} />}
+            />
           </form>
         </div>
       </div>

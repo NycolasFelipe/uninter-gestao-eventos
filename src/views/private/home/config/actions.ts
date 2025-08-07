@@ -3,6 +3,7 @@ import { BsMailbox2Flag } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FaRegCalendarPlus } from "react-icons/fa";
 import { FiHome } from "react-icons/fi";
+import { IoIosStats } from "react-icons/io";
 import { MdOutlineManageAccounts } from "react-icons/md";
 
 interface Action {
@@ -22,11 +23,18 @@ const ACTIONS: Action[] = [
     requiredPermission: "events.post"
   },
   {
+    path: "/event/review",
+    label: "Analisar Eventos",
+    icon: IoIosStats,
+    variant: "secondary",
+    requiredPermission: "events.post"
+  },
+  {
     path: "/manage/subscriptions",
     label: "Gerenciar Inscrições",
     icon: BsMailbox2Flag,
     variant: "secondary",
-    requiredPermission: "subscriptions.post"
+    requiredPermission: "subscriptions.get"
   },
   {
     path: "/manage/users",

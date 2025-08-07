@@ -247,6 +247,19 @@
   margin-top: 2px;
 }
 
+.eventPending {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-md);
+  padding-top: .3rem;
+  border-radius: 6px;
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.15);
+  height: 36px;
+}
+
 @media (max-width: 768px) {
   .subscriptionSection .content {
     flex-direction: column;

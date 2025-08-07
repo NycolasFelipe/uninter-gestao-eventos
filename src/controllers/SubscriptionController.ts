@@ -17,7 +17,7 @@ class SubscriptionController extends BaseController {
   }
 
   async cancelSubscription(id: number): Promise<IResponseGeneric> {
-    return this.post(`${endpoint}/cancel/${id}`, {});
+    return this.get(`${endpoint}/cancel/${id}`);
   }
 }
 

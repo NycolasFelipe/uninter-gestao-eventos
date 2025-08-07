@@ -37,7 +37,11 @@
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+  box-shadow: var(--box-shadow-light);
+  /* border: 1px solid var(--clr-border-subtle); */
+  /* border-color: var(--clr-text-main); */
+
   transition: 0.3s ease;
 }
 
@@ -78,10 +82,11 @@
 }
 
 .eventDetails span {
-  color: var(--clr-border-subtle);
   font-family: var(--font-accent);
-  font-style: oblique;
   font-size: var(--font-size-lg);
+  font-style: oblique;
+  color: var(--clr-primary-green);
+  margin-top: 2px;
 }
 
 .cardDescription {
